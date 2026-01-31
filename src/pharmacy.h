@@ -1,21 +1,24 @@
-#ifndef FARMACI_H
-#define FARMACI_H
+#ifndef PHARMACY_H
+#define PHARMACY_H
 
-#include <vector>
 #include <string>
+#include <vector>
 
-struct Barnat {
-    std::string emri;
+using namespace std;
+
+struct Barne {
+    string emri;
     double cmimi;
 };
 
 class Farmaci {
 private:
-    std::vector<Barnat> karroca;
+    vector<Barne> karroca;
+
 public:
-    void shtoBarne(const std::string& emri, double cmimi);
-    void shfaqKarroca();
-    double checkout();
+    void shtoBarne(const string& emri, double cmimi);
+    void shfaqKarroca() const;
+    void checkout();
 };
 
 #endif
