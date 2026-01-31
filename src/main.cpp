@@ -2,12 +2,14 @@
 #include <vector>
 #include "Patient.h"
 #include "Appointment.h"
+#include "pharmacy.h"   // shtimi i file-t të Student 1
 
 using namespace std;
 
 int main() {
     vector<Patient> pacientet;
     vector<Appointment> terminet;
+    Farmaci karrocaIme;   // instance për Farmaci
 
     int zgjedhja;
 
@@ -17,6 +19,7 @@ int main() {
         cout << "2. Shfaq pacientët\n";
         cout << "3. Shto termin\n";
         cout << "4. Shfaq terminet\n";
+        cout << "5. Blerje barnash\n";  // opsioni i ri
         cout << "0. Dil nga programi\n";
         cout << "Zgjedhja juaj: ";
         cin >> zgjedhja;
@@ -55,6 +58,35 @@ int main() {
             for (const auto& t : terminet) {
                 t.shfaq();
             }
+        }
+        else if (zgjedhja == 5) {
+            int zgjedhjaFarmaci;
+            do {
+                cout << "\n--- FARMACI ---\n";
+                cout << "1. Shto barnë\n";
+                cout << "2. Shfaq karrocën\n";
+                cout << "3. Checkout\n";
+                cout << "0. Kthehu në menunë kryesore\n";
+                cout << "Zgjedhja juaj: ";
+                cin >> zgjedhjaFarmaci;
+
+                if (zgjedhjaFarmaci == 1) {
+                    string emriBarne;
+                    double cmimi;
+                    cout << "Shkruaj emrin e barnës: ";
+                    cin >> emriBarne;
+                    cout << "Shkruaj çmimin: ";
+                    cin >> cmimi;
+                    karrocaIme.shtoBarne(emriBarne, cmimi);
+                }
+                else if (zgjedhjaFarmaci == 2) {
+                    karrocaIme.shfaqKarroca();
+                }
+                else if (zgjedhjaFarmaci == 3) {
+                    karrocaIme.checkout();
+                }
+
+            } while (zgjedhjaFarmaci != 0);
         }
 
     } while (zgjedhja != 0);
