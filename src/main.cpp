@@ -1,26 +1,32 @@
-// MAIN I RREGULLUAR – Erioni (FARMACI)
 #include <iostream>
 #include <vector>
+
 #include "Patient.h"
 #include "Appointment.h"
 #include "pharmacy.h"
+#include "Ambulance.h"
+#include "Report.h"
 
 using namespace std;
 
 int main() {
     vector<Patient> pacientet;
     vector<Appointment> terminet;
-    Farmaci farmacia;
+    Farmaci karrocaIme;
+    Ambulance ambulance;
+    Report raport;
 
     int zgjedhja = -1;
 
     do {
-        cout << "\n--- APLIKACION SHËNDETËSOR DOKI ---\n";
+        cout << "\n--- APLIKACIONI SHËNDETËSOR DOKI ---\n";
         cout << "1. Shto pacient\n";
         cout << "2. Shfaq pacientët\n";
         cout << "3. Shto termin\n";
         cout << "4. Shfaq terminet\n";
         cout << "5. Farmaci (blerje barnash)\n";
+        cout << "6. Gjej ambulancën më të afërt\n";
+        cout << "7. Raporte shëndetësore\n";
         cout << "0. Dil nga programi\n";
         cout << "Zgjedhja juaj: ";
 
@@ -34,6 +40,7 @@ int main() {
         }
 
         switch (zgjedhja) {
+
         case 1: {
             string emri;
             int mosha;
@@ -44,13 +51,18 @@ int main() {
             cin >> mosha;
 
             pacientet.push_back(Patient(emri, mosha));
-            cout << "Pacienti u shtua me sukses.\n";
+            cout << " Pacienti u shtua me sukses.\n";
             break;
         }
+
         case 2:
             cout << "\n--- LISTA E PACIENTËVE ---\n";
-            for (const auto& p : pacientet)
+            if (pacientet.empty()) {
+                cout << "Nuk ka pacientë të regjistruar.\n";
+            }
+            for (const auto& p : pacientet) {
                 p.shfaq();
+            }
             break;
 
         case 3: {
@@ -62,13 +74,18 @@ int main() {
             cin >> data;
 
             terminet.push_back(Appointment(emri, data));
-            cout << "Termini u regjistrua me sukses.\n";
+            cout << " Termini u regjistrua me sukses.\n";
             break;
         }
+
         case 4:
             cout << "\n--- LISTA E TERMINEVE ---\n";
-            for (const auto& t : terminet)
+            if (terminet.empty()) {
+                cout << "Nuk ka termine të regjistruara.\n";
+            }
+            for (const auto& t : terminet) {
                 t.shfaq();
+            }
             break;
 
         case 5: {
@@ -78,19 +95,12 @@ int main() {
                 cout << "1. Shto barnë\n";
                 cout << "2. Shfaq karrocën\n";
                 cout << "3. Checkout\n";
-                cout << "0. Kthehu mbrapa\n";
-                cout << "Zgjedhja juaj: ";
-
+                cout << "0. Kthehu\n";
+                cout << "Zgjedhja: ";
                 cin >> zgjedhjaFarmaci;
 
-                if (cin.fail()) {
-                    cin.clear();
-                    cin.ignore(1000, '\n');
-                    cout << "Zgjedhje e pavlefshme!\n";
-                    continue;
-                }
-
-                if (zgjedhjaFarmaci == 1) {
+                switch (zgjedhjaFarmaci) {
+                case 1: {
                     string emriBarne;
                     double cmimi;
 
@@ -99,29 +109,41 @@ int main() {
                     cout << "Çmimi: ";
                     cin >> cmimi;
 
-                    farmacia.shtoBarne(emriBarne, cmimi);
+                    karrocaIme.shtoBarne(emriBarne, cmimi);
+                    break;
                 }
-                else if (zgjedhjaFarmaci == 2) {
-                    farmacia.shfaqKarroca();
+                case 2:
+                    karrocaIme.shfaqKarroca();
+                    break;
+                case 3:
+                    karrocaIme.checkout();
+                    break;
                 }
-                else if (zgjedhjaFarmaci == 3) {
-                    farmacia.checkout();
-                }
-
             } while (zgjedhjaFarmaci != 0);
             break;
         }
 
+        case 6: {
+            string lokacioni;
+            cout << "Shkruaj lokacionin tuaj: ";
+            cin >> lokacioni;
+            ambulance.gjejAmbulancenMeTeAfert(lokacioni);
+            break;
+        }
+
+        case 7:
+            raport.shfaqRaport();
+            break;
+
         case 0:
-            cout << "Programi po mbyllet...\n";
+            cout << " Programi u mbyll.\n";
             break;
 
         default:
-            cout << "Zgjedhje e pavlefshme!\n";
+            cout << " Zgjedhje e pavlefshme!\n";
         }
 
     } while (zgjedhja != 0);
 
-    cout << "Programi u mbyll.\n";
     return 0;
 }
