@@ -1,3 +1,4 @@
+// MAIN I RREGULLUAR – Erioni (FARMACI)
 #include <iostream>
 #include <vector>
 #include "Patient.h"
