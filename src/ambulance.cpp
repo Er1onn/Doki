@@ -4,12 +4,12 @@
 
 using namespace std;
 
-void Ambulanca::shtoAmbulance(const string& emri, double distanca) {
+void Ambulance::shtoAmbulance(const string& emri, double distanca) {
     listaAmbulancave.push_back({ emri, distanca });
-    cout << "Ambulanca "" << emri << "" u shtua.\n";
+    cout << "Ambulanca \"" << emri << "\" u shtua.\n";
 }
 
-void Ambulanca::shfaqAmbulancat() const {
+void Ambulance::shfaqAmbulancat() const {
     if (listaAmbulancave.empty()) {
         cout << "Nuk ka ambulanca të regjistruara.\n";
         return;
@@ -20,7 +20,7 @@ void Ambulanca::shfaqAmbulancat() const {
         << " - " << listaAmbulancave[i].distanca << " km\n";
 }
 
-void Ambulanca::gjejMeTeAfermen() const {
+void Ambulance::gjejAmbulancenMeTeAfert(const string& qyteti) const {
     if (listaAmbulancave.empty()) {
         cout << "Nuk ka ambulanca të regjistruara.\n";
         return;
@@ -35,7 +35,7 @@ void Ambulanca::gjejMeTeAfermen() const {
             indeksi = i;
         }
 
-    cout << "Ambulanca më e afërt është: "
-        << listaAmbulancave[indeksi].emri
+    cout << "Ambulanca më e afërt për qytetin " << qyteti
+        << " është: " << listaAmbulancave[indeksi].emri
         << " - " << listaAmbulancave[indeksi].distanca << " km\n";
 }

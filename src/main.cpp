@@ -1,22 +1,18 @@
 #include <iostream>
 #include <vector>
 
-// Erion
 #include "Patient.h"
 #include "Appointment.h"
 #include "pharmacy.h"
-
-// Loresa
 #include "ambulance.h"
-
-// Delvina
-#include "Report.h"
+#include "report.h"
 
 using namespace std;
 
 int main() {
     vector<Patient> pacientet;
     vector<Appointment> terminet;
+
     Farmaci farmaci;
     Ambulance ambulance;
     Report raport;
@@ -25,15 +21,15 @@ int main() {
 
     do {
         cout << "\n==============================\n";
-        cout << "  Sistemi Sh\x89ndet\x89sor - Doki\n";
+        cout << "  Aplikacioni Shendetesor - Doki\n";
         cout << "==============================\n";
         cout << "1. Shto pacient\n";
-        cout << "2. Shfaq pacient\x89t\n";
+        cout << "2. Shfaq pacientet\n";
         cout << "3. Shto termin\n";
         cout << "4. Shfaq terminet\n";
-        cout << "5. Menaxho farmacin\x89\n";
-        cout << "6. Gjej ambulanc\x89n m\x89 t\x89 af\x89rt\n";
-        cout << "7. Shfaq raport sh\x89ndet\x89sor\n";
+        cout << "5. Menaxho farmacin\n";
+        cout << "6. Gjej ambulancen me te afert\n";
+        cout << "7. Shfaq raport shendetesor\n";
         cout << "0. Dil\n";
         cout << "Zgjedhja: ";
         cin >> zgjedhja;
@@ -41,44 +37,55 @@ int main() {
         switch (zgjedhja) {
 
         case 1: {
-            Patient p;
-            p.shtoPacient();
-            pacientet.push_back(p);
+            string emri;
+            int mosha;
+            cout << "Emri: ";
+            cin >> emri;
+            cout << "Mosha: ";
+            cin >> mosha;
+            pacientet.push_back(Patient(emri, mosha));
             break;
         }
 
         case 2:
-            if (pacientet.empty()) {
-                cout << "Nuk ka pacient\x89 t\x89 regjistruar.\n";
-            }
-            else {
-                for (const auto& p : pacientet) {
-                    p.shfaqPacient();
-                }
-            }
+            if (pacientet.empty())
+                cout << "Nuk ka paciente.\n";
+            else
+                for (const auto& p : pacientet)
+                    p.shfaq();
             break;
 
         case 3: {
-            Appointment a;
-            a.shtoTermin();
-            terminet.push_back(a);
+            string emri, data;
+            cout << "Emri i pacientit: ";
+            cin >> emri;
+            cout << "Data: ";
+            cin >> data;
+            terminet.push_back(Appointment(emri, data));
             break;
         }
 
         case 4:
-            if (terminet.empty()) {
-                cout << "Nuk ka termine t\x89 regjistruara.\n";
-            }
-            else {
-                for (const auto& t : terminet) {
-                    t.shfaqTermin();
-                }
-            }
+            if (terminet.empty())
+                cout << "Nuk ka termine.\n";
+            else
+                for (const auto& t : terminet)
+                    t.shfaq();
             break;
 
-        case 5:
-            farmaci.shfaqBarnat();
+        case 5: {
+            string emri;
+            double cmimi;
+
+            cout << "Emri i barit: ";
+            cin >> emri;
+
+            cout << "Cmimi i barit: ";
+            cin >> cmimi;
+
+            farmaci.shtoBarne(emri, cmimi);
             break;
+        }
 
         case 6:
             ambulance.gjejAmbulancenMeTeAfert("Qyteti");

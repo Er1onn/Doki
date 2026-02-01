@@ -6,19 +6,20 @@
 
 using namespace std;
 
+// Struktura për informacion mbi ambulancën
 struct AmbulancaInfo {
     string emri;
     double distanca; // në kilometra
 };
 
-class Ambulanca {
+class Ambulance {
 private:
     vector<AmbulancaInfo> listaAmbulancave;
 
 public:
     void shtoAmbulance(const string& emri, double distanca);
     void shfaqAmbulancat() const;
-    void gjejMeTeAfermen() const;
+    void gjejAmbulancenMeTeAfert(const string& qyteti) const;
 };
 
 #endif
